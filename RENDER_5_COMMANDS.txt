@@ -1,0 +1,77 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     🚀 RENDER DEPLOYMENT - 5 COMMANDS + 3 CLICKS 🚀         ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+TOTAL TIME: 10 minutes
+DIFFICULTY: Super Easy
+COST: FREE
+
+═══════════════════════════════════════════════════════════════
+COMMANDS (Copy-Paste These):
+═══════════════════════════════════════════════════════════════
+
+1️⃣  Prepare project:
+
+bash RENDER_QUICK_DEPLOY.sh
+
+
+2️⃣  Set your GitHub username (CHANGE THIS!):
+
+export GITHUB_USER="YOUR_GITHUB_USERNAME"
+
+
+3️⃣  Add GitHub remote:
+
+git remote add origin https://github.com/$GITHUB_USER/adaptive-liquidity-provision.git
+
+
+4️⃣  Commit everything:
+
+git add .
+git commit -m "Production ready deployment"
+
+
+5️⃣  Push to GitHub:
+
+git branch -M main
+git push -u origin main
+
+═══════════════════════════════════════════════════════════════
+WEB CLICKS (Do These After Commands):
+═══════════════════════════════════════════════════════════════
+
+CLICK 1: Create GitHub Repo
+  → Go to: https://github.com/new
+  → Name: adaptive-liquidity-provision
+  → Visibility: PUBLIC ✅
+  → Click "Create repository"
+
+CLICK 2: Sign up for Render
+  → Go to: https://render.com/
+  → Click "Get Started"
+  → Sign up with GitHub
+
+CLICK 3: Deploy on Render
+  → Go to: https://dashboard.render.com/
+  → Click "New +" → "Web Service"
+  → Connect your repo
+  → Click "Create Web Service"
+
+═══════════════════════════════════════════════════════════════
+DONE!
+═══════════════════════════════════════════════════════════════
+
+Wait 3-5 minutes for build.
+
+Your dashboard will be live at:
+https://adaptive-liquidity-provision.onrender.com
+
+═══════════════════════════════════════════════════════════════
+NEED MORE HELP?
+═══════════════════════════════════════════════════════════════
+
+Full guide: START_HERE_RENDER.md
+
+That's it! 🎉

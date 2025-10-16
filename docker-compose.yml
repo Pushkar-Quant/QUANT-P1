@@ -1,0 +1,92 @@
+# Docker Compose configuration for complete system deployment
+
+version: '3.8'
+
+services:
+  # Main dashboard application
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alpe-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./experiments:/app/experiments
+      - ./logs:/app/logs
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    networks:
+      - alpe-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  
+  # Advanced analytics dashboard
+  advanced-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alpe-advanced-dashboard
+    command: streamlit run src/visualization/advanced_dashboard.py --server.port=8502 --server.address=0.0.0.0
+    ports:
+      - "8502:8502"
+    volumes:
+      - ./experiments:/app/experiments
+      - ./logs:/app/logs
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    networks:
+      - alpe-network
+  
+  # Tensorboard for training monitoring
+  tensorboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alpe-tensorboard
+    command: tensorboard --logdir=/app/experiments/runs --host=0.0.0.0 --port=6006
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./experiments:/app/experiments
+    restart: unless-stopped
+    networks:
+      - alpe-network
+  
+  # Training service (optional, for background training)
+  training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alpe-training
+    command: python scripts/train.py --config experiments/configs/ppo_baseline.yaml
+    volumes:
+      - ./experiments:/app/experiments
+      - ./logs:/app/logs
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - alpe-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles:
+      - training
+
+networks:
+  alpe-network:
+    driver: bridge
+
+volumes:
+  experiments-data:
+  logs-data:

@@ -1,0 +1,29 @@
+# Optimized for Render Free Tier (512MB RAM)
+# Lighter dependencies for dashboard-only deployment
+
+# Core Dependencies
+numpy>=1.24.0,<2.0.0
+pandas>=2.0.0,<2.2.0
+scipy>=1.10.0,<1.12.0
+
+# Reinforcement Learning (lighter alternatives)
+gymnasium>=0.29.0,<0.30.0
+# torch - Only if needed for trained models, otherwise skip
+# stable-baselines3 - Skip for dashboard-only
+# ray - Too heavy for free tier, skip
+
+# Visualization (essential for dashboard)
+matplotlib>=3.7.0,<3.9.0
+plotly>=5.14.0,<5.19.0
+streamlit>=1.25.0,<1.30.0
+seaborn>=0.12.0,<0.14.0
+
+# Data Processing
+pyarrow>=12.0.0,<14.0.0
+
+# Utilities
+pyyaml>=6.0,<7.0
+tqdm>=4.65.0,<5.0.0
+
+# Performance (lightweight)
+numba>=0.57.0,<0.59.0
