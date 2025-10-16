@@ -1,0 +1,33 @@
+# PPO Aggressive Configuration
+# Higher risk tolerance, tighter spreads
+
+# Training Parameters
+total_timesteps: 1500000
+learning_rate: 0.0005
+n_steps: 4096
+batch_size: 128
+n_epochs: 15
+gamma: 0.995
+gae_lambda: 0.98
+clip_range: 0.15
+ent_coef: 0.02
+vf_coef: 0.5
+max_grad_norm: 0.5
+
+# Environment Parameters
+episode_duration: 150.0
+time_step: 1.0
+initial_cash: 100000.0
+max_inventory: 1500  # Higher inventory tolerance
+initial_midprice: 100.0
+initial_spread: 0.01  # Tighter initial spread
+tick_size: 0.01
+
+# Reward Parameters (more aggressive)
+inventory_penalty: 0.005  # Lower penalty
+volatility_penalty: 0.0005
+impact_penalty: 0.05
+
+# Simulation Parameters
+seed: 123
+save_freq: 75000

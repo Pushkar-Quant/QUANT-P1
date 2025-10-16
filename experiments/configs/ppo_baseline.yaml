@@ -1,0 +1,33 @@
+# PPO Baseline Configuration
+# Standard configuration for training PPO market maker
+
+# Training Parameters
+total_timesteps: 1000000
+learning_rate: 0.0003
+n_steps: 2048
+batch_size: 64
+n_epochs: 10
+gamma: 0.99
+gae_lambda: 0.95
+clip_range: 0.2
+ent_coef: 0.01
+vf_coef: 0.5
+max_grad_norm: 0.5
+
+# Environment Parameters
+episode_duration: 100.0
+time_step: 1.0
+initial_cash: 100000.0
+max_inventory: 1000
+initial_midprice: 100.0
+initial_spread: 0.02
+tick_size: 0.01
+
+# Reward Parameters
+inventory_penalty: 0.01
+volatility_penalty: 0.001
+impact_penalty: 0.1
+
+# Simulation Parameters
+seed: 42
+save_freq: 50000
